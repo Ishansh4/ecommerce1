@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E-commerce Website</title>
+
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+}
+
+h1 {
+  margin: 0;
+margin-right: 990px;
+}
+
+nav {
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+li.active {
+  background-color: #333;
+  color: white;
+}
+
+main {
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+}
+
+#filterOptions {
+  margin-bottom: 20px;
+}
+
+#productList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.productCard {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.productCard img {
+  max-width: 100%;
+  height: auto;
+}
+
+.productCard h3 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.productCard p {
+  margin-top: 5px;
+  color: #888;
+}
+
+#darkModeToggle {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.darkMode {
+  background-color: #333;
+  color: white;
+}
+
+.darkMode header {
+  background-color: #111;
+}
+
+.darkMode nav {
+  background-color: #111;
+}
+
+.darkMode li.active {
+  background-color: #111;
+}
+
+.darkMode main {
+  background-color: #111;
+  color: white;
+}
+
+.darkMode h2 {
+  color: white;
+}
+
+.darkMode .productCard {
+  background-color: #222;
+  color: white;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.darkMode .productCard h3 {
+  color: white;
+}
+
+.darkMode footer {
+  background-color: #111;
+}
+
+.darkMode p {
+  color: #888;
+}
+
+</style>
+<body>
+  <header>
+    <h1>MusyHead Store</h1>
+    <button id="darkModeToggle">Dark Mode</button>
+  </header>
+
+  <nav>
+    <ul>
+      <li class="active">Home</li>
+      <li>Products</li>
+      <li>Categories</li>
+      <li>Cart</li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="productsSection">
+      <h2>Products</h2>
+      <div id="filterOptions">
+        <label for="filterCategory">Category:</label>
+        <select id="filterCategory">
+          <option value="all">All</option>
+          <option value="sony">Sony</option>
+          <option value="bose">Bose</option>
+          <option value="jbl">JBL</option>
+          <option value="apple">Apple</option>
+        </select>
+      </div>
+      <div id="productList">
+        <!-- Product cards will be dynamically generated here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Musy head . All rights reserved.  Ishansh Taunk</p>
+  </footer>
+
+  <script>
+    const productList = [
+  { name: 'Sony WH-1000XM4', category: 'sony', price: 29000, image: 'https://d2d22nphq0yz8t.cloudfront.net/88e6cc4b-eaa1-4053-af65-563d88ba8b26/https://media.croma.com/image/upload/v1674050221/Croma%20Assets/Communication/Headphones%20and%20Earphones/Images/229088_0_gz8vuu.png/mxw_2256,f_auto' },
+  { name: 'Sony WH-CH510', category: 'sony', price: 4900, image: 'https://d2d22nphq0yz8t.cloudfront.net/88e6cc4b-eaa1-4053-af65-563d88ba8b26/https://media.croma.com/image/upload/v1674049925/Croma%20Assets/Communication/Headphones%20and%20Earphones/Images/221597_0_ecj9fb.png/mxw_2256,f_auto' },
+  { name: 'Sony WH-1000XM5', category: 'sony', price: 30000, image: 'https://d2d22nphq0yz8t.cloudfront.net/88e6cc4b-eaa1-4053-af65-563d88ba8b26/https://media.croma.com/image/upload/v1669124952/Croma%20Assets/Entertainment/Headphones%20and%20Earphones/Images/262566_0_emihyi.png/mxw_2256,f_auto' },
+  { name: 'Bose QuietComfort 45 Headphones', category: 'bose', price: 10000, image: 'https://assets.bose.com/content/dam/cloudassets/Bose_DAM/Web/consumer_electronics/global/products/headphones/qc45/product_silo_images/QC45_PDP_Ecom-Gallery-W02.png/jcr:content/renditions/cq5dam.web.1000.1000.png' },
+  { name: 'Bose Noise Cancelling Headphones 700', category: 'bose', price: 12300, image: 'https://assets.bose.com/content/dam/cloudassets/Bose_DAM/Web/consumer_electronics/global/products/headphones/noise_cancelling_headphones_700/product_silo_images/Silo_jpg/noise_cancelling_headphones_700_blk_EC_hero.png/jcr:content/renditions/cq5dam.web.1280.1280.png' },
+  { name: 'Bose A30 Aviation Headset', category: 'bose', price: 90000, image: 'https://assets.bose.com/content/dam/cloudassets/Bose_DAM/Web/consumer_electronics/global/products/headphones/a30-aviation-headset/product_silo_images/A30-Gallery-images2_ecom_Front.png/jcr:content/renditions/cq5dam.web.1000.1000.png' },
+  { name: 'JBL Tour One', category: 'jbl', price: 79000, image: 'https://in.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw32b79b26/1.%20JBL_TOUR_ONE_Product%20Image_Hero.png?sw=537&sfrm=png' },
+  { name: 'JBL Live 660NC', category: 'jbl', price: 74000, image: 'https://in.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw0a23bec3/JBL_LIVE_660NC_Product_Image_Hero_Blue.png?sw=537&sfrm=png' },
+  { name: 'JBL Tune 760NC', category: 'jbl', price: 50000, image: 'https://in.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw58b216fb/1.JBL_TUNE_760NC_Product%20Image_Hero_White.png?sw=537&sfrm=png' },
+  { name: 'Air Pods Max', category: 'apple', price: 50000, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-max-select-skyblue-202011?wid=940&hei=1112&fmt=png-alpha&.v=1604022365000' },
+
+  // Add more products here...
+];
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+const productListContainer = document.getElementById('productList');
+const filterCategory = document.getElementById('filterCategory');
+
+// Function to generate product cards
+function generateProductCards(products) {
+  productListContainer.innerHTML = '';
+  products.forEach(product => {
+    const card = document.createElement('div');
+    card.classList.add('productCard');
+
+    const image = document.createElement('img');
+    image.src = product.image;
+    image.alt = product.name;
+
+    const name = document.createElement('h3');
+    name.textContent = product.name;
+
+    const price = document.createElement('p');
+    price.textContent = `Rs ${product.price}`;
+
+    card.appendChild(image);
+    card.appendChild(name);
+    card.appendChild(price);
+    productListContainer.appendChild(card);
+  });
+}
+
+// Function to filter products based on category
+function filterProducts(category) {
+  if (category === 'all') {
+    generateProductCards(productList);
+  } else {
+    const filteredProducts = productList.filter(product => product.category === category);
+    generateProductCards(filteredProducts);
+  }
+}
+
+// Event listener for category filter
+filterCategory.addEventListener('change', function () {
+  const selectedCategory = this.value;
+  filterProducts(selectedCategory);
+});
+
+// Event listener for dark mode toggle
+darkModeToggle.addEventListener('click', function () {
+  document.body.classList.toggle('darkMode');
+});
+
+// Initial product card generation
+generateProductCards(productList);
+
+  </script>
+</body>
+</html>
